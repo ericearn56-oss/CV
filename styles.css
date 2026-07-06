@@ -132,8 +132,8 @@ img { max-width: 100%; display: block; }
 }
 
 .nav-links a {
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
+  padding: 0.5rem 0.7rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   color: var(--text-muted);
   border-radius: 8px;
@@ -396,6 +396,14 @@ img { max-width: 100%; display: block; }
   font-size: clamp(2rem, 4vw, 2.75rem);
   font-weight: 700;
   letter-spacing: -0.02em;
+}
+
+.section-desc {
+  margin-top: 0.75rem;
+  max-width: 640px;
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.7;
 }
 
 .sub-title {
@@ -772,8 +780,29 @@ img { max-width: 100%; display: block; }
 }
 
 .award-icon {
-  font-size: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
   margin-bottom: 1rem;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.award-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.award-icon svg :is(path, circle, rect) {
+  stroke: #fff;
+  fill: none;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .award-year {
@@ -914,6 +943,151 @@ img { max-width: 100%; display: block; }
   min-width: 3rem;
 }
 
+/* ===== Portfolio ===== */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.5rem;
+}
+
+.portfolio-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.portfolio-card:hover {
+  border-color: rgba(56, 189, 248, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.28);
+}
+
+.portfolio-card-embed {
+  grid-column: span 1;
+}
+
+.portfolio-embed {
+  position: relative;
+  width: 100%;
+  background: transparent;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.portfolio-embed-framed {
+  padding: 0;
+  background: transparent;
+  border-top: none;
+  box-shadow: none;
+}
+
+.portfolio-embed-framed img {
+  border: none;
+}
+
+.portfolio-embed iframe {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: 399px;
+  border: 0;
+}
+
+.portfolio-embed img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 480px;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.portfolio-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 140px;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.1) 0%, rgba(129, 140, 248, 0.06) 100%);
+  border-bottom: 1px solid var(--border);
+  color: #fff;
+}
+
+.portfolio-visual svg {
+  width: 48px;
+  height: 48px;
+}
+
+.portfolio-visual svg :is(path, circle, rect) {
+  stroke: #fff;
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.portfolio-body {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio-year {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.portfolio-body h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 0.65rem;
+}
+
+.portfolio-body p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  flex: 1;
+  margin-bottom: 1rem;
+}
+
+.portfolio-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.portfolio-tags span {
+  padding: 0.25rem 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--accent-2);
+  background: rgba(34, 211, 238, 0.08);
+  border: 1px solid rgba(34, 211, 238, 0.15);
+  border-radius: 4px;
+}
+
+.portfolio-link {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent);
+  transition: var(--transition);
+}
+
+.portfolio-link:hover {
+  color: var(--accent-2);
+  transform: translateX(4px);
+}
+
 /* ===== Contact ===== */
 .contact-section {
   padding-bottom: 4rem;
@@ -969,9 +1143,23 @@ img { max-width: 100%; display: block; }
   border: 1px solid var(--border);
   border-radius: var(--radius);
   transition: var(--transition);
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  color: inherit;
 }
 
-.contact-card:hover {
+.contact-card-btn {
+  cursor: pointer;
+}
+
+.contact-card-btn:hover {
+  border-color: var(--accent);
+  background: rgba(56, 189, 248, 0.05);
+  transform: translateX(6px);
+}
+
+a.contact-card:hover {
   border-color: var(--accent);
   background: rgba(56, 189, 248, 0.05);
   transform: translateX(6px);
@@ -989,6 +1177,107 @@ img { max-width: 100%; display: block; }
   font-size: 1rem;
   font-weight: 500;
   color: var(--text);
+}
+
+/* ===== WeChat Modal ===== */
+.wechat-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.wechat-modal[hidden] {
+  display: none;
+}
+
+.wechat-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+}
+
+.wechat-modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  padding: 2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+}
+
+.wechat-modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.wechat-modal-close:hover {
+  color: var(--text);
+}
+
+.wechat-modal-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.wechat-modal-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.wechat-qr {
+  display: inline-flex;
+  padding: 1rem;
+  background: #fff;
+  border-radius: var(--radius);
+  margin-bottom: 1.25rem;
+}
+
+.wechat-qr img,
+.wechat-qr canvas {
+  display: block;
+}
+
+.wechat-id {
+  margin-bottom: 1.25rem;
+}
+
+.wechat-id-label {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  margin-bottom: 0.35rem;
+}
+
+.wechat-id code {
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  color: var(--accent);
+  word-break: break-all;
+}
+
+.wechat-copy-btn {
+  width: 100%;
+  justify-content: center;
 }
 
 /* ===== Footer ===== */
@@ -1025,6 +1314,12 @@ img { max-width: 100%; display: block; }
 }
 
 /* ===== Responsive ===== */
+@media (min-width: 1100px) {
+  .portfolio-card-embed {
+    grid-column: span 2;
+  }
+}
+
 @media (max-width: 1024px) {
   .hero {
     grid-template-columns: 1fr;
@@ -1047,6 +1342,10 @@ img { max-width: 100%; display: block; }
   .edu-grid,
   .awards-grid {
     grid-template-columns: 1fr;
+  }
+
+  .portfolio-card-embed {
+    grid-column: span 1;
   }
 }
 
