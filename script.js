@@ -59,8 +59,65 @@ const observerReveal = new IntersectionObserver(
 revealElements.forEach(el => observerReveal.observe(el));
 
 // Stagger card animations
-document.querySelectorAll('.cards-grid, .expertise-grid, .awards-grid, .edu-grid').forEach(grid => {
-  grid.querySelectorAll('.card, .expertise-category, .award-card, .edu-card').forEach((card, i) => {
+document.querySelectorAll('.cards-grid, .expertise-grid, .awards-grid, .edu-grid, .portfolio-grid').forEach(grid => {
+  grid.querySelectorAll('.card, .expertise-category, .award-card, .edu-card, .portfolio-card').forEach((card, i) => {
     card.style.transitionDelay = `${i * 0.08}s`;
   });
+});
+
+// WeChat QR modal
+const WECHAT_ID = 'wxid_vimmlxl6oy9n22';
+const wechatBtn = document.getElementById('wechatBtn');
+const wechatModal = document.getElementById('wechatModal');
+const wechatModalClose = document.getElementById('wechatModalClose');
+const wechatModalBackdrop = document.getElementById('wechatModalBackdrop');
+const wechatQr = document.getElementById('wechatQr');
+const wechatCopyBtn = document.getElementById('wechatCopyBtn');
+let wechatQrInstance = null;
+
+function openWechatModal() {
+  wechatModal.hidden = false;
+  document.body.style.overflow = 'hidden';
+
+  if (!wechatQrInstance && typeof QRCode !== 'undefined') {
+    wechatQr.innerHTML = '';
+    wechatQrInstance = new QRCode(wechatQr, {
+      text: WECHAT_ID,
+      width: 200,
+      height: 200,
+      colorDark: '#000000',
+      colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.H,
+    });
+  }
+}
+
+function closeWechatModal() {
+  wechatModal.hidden = true;
+  document.body.style.overflow = '';
+}
+
+wechatBtn?.addEventListener('click', openWechatModal);
+wechatModalClose?.addEventListener('click', closeWechatModal);
+wechatModalBackdrop?.addEventListener('click', closeWechatModal);
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && !wechatModal.hidden) {
+    closeWechatModal();
+  }
+});
+
+wechatCopyBtn?.addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(WECHAT_ID);
+    wechatCopyBtn.textContent = 'Copied!';
+    setTimeout(() => {
+      wechatCopyBtn.textContent = 'Copy ID';
+    }, 2000);
+  } catch {
+    wechatCopyBtn.textContent = 'Copy failed';
+    setTimeout(() => {
+      wechatCopyBtn.textContent = 'Copy ID';
+    }, 2000);
+  }
 });
